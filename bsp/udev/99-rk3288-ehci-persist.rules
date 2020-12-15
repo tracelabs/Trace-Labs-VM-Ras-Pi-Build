@@ -1,0 +1,1 @@
+ACTION=="add|change", SUBSYSTEM=="usb", ENV{DEVTYPE}=="usb_device", ENV{ID_MODEL}!="EHCI_Host_Controller", DRIVERS=="ehci-platform", ATTR{power/persist}="1"

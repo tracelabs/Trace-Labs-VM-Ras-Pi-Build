@@ -1,0 +1,186 @@
+# the following U-Boot env vars are assumed to be set:
+#  - automatically by the bootloader:
+#    dtype - nand|usb|mmc|sata
+#    mem_mb - Mib's of memory (ie 1024)
+#    loadaddr - memory address for loading blobs
+#  - optionally by the user:
+#    mem - optional kernel cmdline args intended for mem allocation
+#    video - optional kernel cmdline args intended for display
+#    extra - optional kernel cmdline args
+#    fixfdt - optional script to execute prior to bootm
+#
+# if 'video' is not set, it will be determined by detecting a connected
+# HDMI monitor and LVDS touchscreen displays with I2C touch controlellers.
+#
+# if 'mem' is not set, it will be automatically allocated
+#
+
+echo "Gateworks Ubuntu Bootscript v1.23"
+
+# calculate load addresses based off of loadaddr as the base
+# and allow 128KB for FDT and 64MB for kernel
+setexpr fdt_addr $loadaddr
+setexpr linux_addr $fdt_addr + 0x20000 # allow 128KB for FDT
+setexpr rd_addr $linux_addr + 0x4000000 # allow 64MB for kernel
+
+# CMA (memory allocation)
+if test -z "${mem}" ; then
+  # CMA used by etnaviv display driver and coda VPU driver
+  # specific requirements depend on display res and encode/decode res
+  # coherent_pool is used by various drivers such as ath10k
+  setenv mem "cma=64M coherent_pool=4M"
+  echo "Detected ${mem_mb}MB DRAM: $mem" 
+fi
+if itest.s "x${mem}" == "xNA" ; then
+  echo "Leaving CMA alone..."
+else
+  setenv extra "${extra}" "${mem}"
+  echo "Memory configuration used from env mem: $mem"
+fi
+
+# Display output
+if test -z "${video}" ; then
+  # locally used variables
+  setenv lvds_flag
+  setenv hdmi_flag
+
+  # Default displays to display if displays is empty
+  if test -z "${displays}"; then
+    setenv displays "${display}"
+  fi
+
+  # Detect HDMI if displays is empty (HDMI)
+  if test -z "${displays}" ; then
+    i2c dev 2
+    if hdmidet ; then # HDMI
+      setenv displays "HDMI"
+      echo "HDMI Detected"
+    fi
+  fi
+
+  # Configure displays
+  echo "Display(s) to configure: ${displays}"
+  for disp in ${displays} ; do
+    if itest.s "x${disp}" == "xHDMI" ; then
+      if test -z "${hdmi_flag}" ; then # Only allow one HDMI display
+        setenv hdmi_flag 1
+        test -n "${hdmi}" || hdmi=1080p
+        if itest.s "x${hdmi}" == "x1080p" ; then
+          setenv hdmi "1920x1080M@60"
+        elif itest.s "x${hdmi}" == "x720p" ; then
+          setenv hdmi "1280x720M@60"
+        elif itest.s "x${hdmi}" == "x480p" ; then
+          setenv hdmi "720x480M@60"
+        fi
+        setenv video "${video}" "video=HDMI-A-1:${hdmi}"
+     fi
+
+     # Freescale MCIMX-LVDS1 10" XGA Touchscreen Display
+     elif itest.s "x${disp}" == "xHannstar-XGA" ; then
+       if test -z "${lvds_flag}" ; then # Only allow one LVDS display
+         setenv lvds_flag 1
+         setenv video "${video}" "video=LVDS-1:1024x768@65M"
+         setenv display "Hannstar-XGA"
+       fi
+
+     # GW17029 DLC700JMGT4 7" WSVGA Touchscreen Display
+     elif itest.s "x${disp}" == "xDLC700JMGT4" ; then
+       if test -z "${lvds_flag}" ; then # Only allow one LVDS display
+         setenv lvds_flag 1
+         setenv video "${video}" "video=LVDS-1:1024x600@65M"
+         setenv display "DLC700JMGT4"
+       fi
+
+     # GW17030 DLC800FIGT3 8" XGA Touchscreen Display"
+     elif itest.s "x${disp}" == "xDLC800FIGT3" ; then
+       if test -z "${lvds_flag}" ; then # Only allow one LVDS display
+         setenv lvds_flag 1
+         setenv video "${video}" "video=LVDS-1:1024x768@65M"
+         setenv display "DLC800FIGT3"
+       fi
+
+     elif itest.s "x${disp}" != "none" ; then
+       echo "${disp} is an unsupported display type"
+       echo "Valid Displays: HDMI|Hannstar-XGA|DLC700JMGT4|DLC800FIGT3"
+     fi
+  done
+
+  # disable unused connectors
+  if test -z "${hdmi_flag}" ; then
+    setenv video "${video}" "video=HDMI-A-1:d"
+  fi
+  if test -z "${lvds_flag}" ; then
+    setenv video "${video}" "video=LVDS-1:d"
+  fi
+
+  # Set only if video is set
+  if test -n "${video}" ; then
+    setenv video "${video}"
+  fi
+  echo "Video configuration: ${video}"
+else
+  echo "Video configuration used from env video: ${video}"
+fi
+
+# setup root and load options based on dev type
+if itest.s "x${dtype}" == "xnand" ; then
+  echo "Booting from NAND/ubifs..."
+  setenv root "root=ubi0:rootfs ubi.mtd=2 ubi.fm_autoconvert=1 rootfstype=ubifs rw rootwait"
+  setenv fsload "ubifsload"
+elif itest.s "x${dtype}" == "xmmc" ; then
+  echo "Booting from MMC..."
+  part uuid mmc 0:1 uuid
+  if test -z "${uuid}" ; then
+     setenv root "root=/dev/mmcblk0p1 rootwait rw rootfstype=ext3"
+  else
+     setenv root "root=PARTUUID=${uuid} rootwait rw rootfstype=ext3"
+  fi
+  setenv fsload "ext2load $dtype 0:1"
+  setenv rd_addr # ramdisk not needed for IMX6 MMC
+elif itest.s "x${dtype}" == "xusb" ; then
+  echo "Booting from USB Mass Storage..."
+  setenv root "root=/dev/sda1 rootwait"
+  setenv fsload "ext2load $dtype 0:1"
+elif itest.s "x${dtype}" == "xsata" ; then
+  echo "Booting from SATA..."
+  setenv root "root=/dev/sda1 rootwait"
+  setenv fsload "ext2load $dtype 0:1"
+  setenv rd_addr # ramdisk not needed for IMX6 AHCI SATA
+fi
+
+# setup bootargs
+setenv bootargs "console=${console},${baudrate} ${root} ${video} ${extra}"
+
+# additional bootargs
+setenv bootargs "${bootargs} pci=nomsi" # MSI+legacy IRQs do not work on IMX6
+setenv bootargs "${bootargs} usbcore.autosuspend=-1" # IMX6DQ ERR004535
+
+# Gateworks kernels do not need ramdisk
+setenv rd_addr
+
+# load fdt/kernel/ramdisk
+echo "Loading FDT..."
+$fsload $fdt_addr boot/$fdt_file ||
+$fsload $fdt_addr boot/$fdt_file1 ||
+$fsload $fdt_addr boot/$fdt_file2
+echo "Loading Kernel..."
+$fsload $linux_addr boot/uImage
+if itest.s "x${rd_addr}" != "x" ; then
+  echo "Loading Ramdisk..."
+  $fsload $rd_addr boot/uramdisk
+fi
+if itest.s "x${dtype}" == "xnand" ; then
+  ubifsumount
+fi
+
+# fdt fixup
+test -n "$fixfdt" && run fixfdt
+
+# boot
+if itest.s "x${rd_addr}" != "x" ; then
+  echo "Booting ramdisk with "$bootargs"..."
+  bootm $linux_addr $rd_addr $fdt_addr
+else
+  echo "Booting with "$bootargs"..."
+  bootm $linux_addr - $fdt_addr
+fi

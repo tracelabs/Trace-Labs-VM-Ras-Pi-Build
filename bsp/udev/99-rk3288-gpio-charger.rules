@@ -1,0 +1,1 @@
+ACTION=="add|change", SUBSYSTEM=="platform", ENV{DRIVER}=="gpio-charger", ATTR{power/wakeup}="disabled"

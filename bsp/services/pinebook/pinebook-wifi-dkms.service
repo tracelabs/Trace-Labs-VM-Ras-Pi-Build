@@ -1,0 +1,10 @@
+[Unit]
+Description=Compile wifi driver on first boot.
+Before=regenerate_ssh_host_keys.service
+[Service]
+Type=oneshot
+ExecStart=/bin/sh -c "cd /usr/src/rtl8723cs && dkms install ."
+ExecStart=/bin/sh -c "modprobe 8723cs"
+ExecStartPost=/bin/systemctl disable pinebook-wifi-dkms.service
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,12 @@
+[Unit]
+Description=Copy user wpa_supplicant.conf
+ConditionPathExists=/boot/wpa_supplicant.conf
+Before=dhcpcd.service
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+ExecStart=/usr/bin/copy-user-wpasupplicant.sh
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,1 @@
+KERNEL=="mmcblk0*", ENV{UDISKS_IGNORE}="1"

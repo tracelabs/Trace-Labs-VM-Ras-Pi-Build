@@ -1,0 +1,15 @@
+#!/bin/sh
+# Code comes from Fran Rodriguez
+# https://github.com/FrangaL/rpi-img-builder
+DISKPART="$(findmnt -n -o SOURCE /)"
+DISKNAME="/dev/$(lsblk -no pkname "$DISKPART")"
+flock ${DISKNAME} sfdisk -f ${DISKNAME} -N ${DISKPART##*[!0-9]} <<EOF
+,+
+EOF
+ 
+sleep 5
+udevadm settle
+sleep 5
+flock ${DISKNAME} partprobe ${DISKNAME}
+mount -o remount,rw ${DISKPART}
+resize2fs ${DISKPART}

@@ -1,0 +1,9 @@
+[Unit]
+Description=Resize filesystem
+After=regenerate_ssh_host_keys.service
+[Service]
+Type=oneshot
+ExecStart=/root/scripts/rpi-wiggle.sh
+ExecStartPost=/bin/systemctl disable rpiwiggle
+[Install]
+WantedBy=multi-user.target
