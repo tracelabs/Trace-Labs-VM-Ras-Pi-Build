@@ -3,6 +3,15 @@
 # A trusted Kali Linux image created by Offensive Security - http://www.offensive-security.com
 set -e
 
+# Give the option to install all tools now, or just create a min install
+echo "Would you like to install all additional tools?  y/n:  "
+read answer
+if [[ $answer != "y" && $answer != "n" ]]; then
+    echo "Not a valid choice"
+    exit 0
+fi
+
+
 # Uncomment to activate debug
 # debug=true
 if [ "$debug" = true ]; then
@@ -75,6 +84,8 @@ else
   mkdir -p ${basedir}
 fi
 
+
+
 components="main,contrib,non-free"
 #arm="kali-linux-arm ntpdate"
 arm="ntpdate"
@@ -121,7 +132,7 @@ eatmydata debootstrap --foreign --keyring=/usr/share/keyrings/kali-archive-keyri
 
 # systemd-nspawn enviroment
 systemd-nspawn_exec(){
-  LANG=C systemd-nspawn -q --bind-ro ${qemu_bin} --capability=cap_setfcap --setenv=RUNLEVEL=1 -M ${machine} -D ${work_dir} "$@"
+  LANG=C systemd-nspawn -q --bind-ro ${qemu_bin} --cpu-affinity=8-13 --capability=cap_setfcap --setenv=RUNLEVEL=1 -M ${machine} -D ${work_dir} "$@"
 }
 
 # We need to manually extract eatmydata to use it for the second stage.
@@ -322,11 +333,23 @@ sed -i 's/^TimeoutStartSec=5min/TimeoutStartSec=15/g' "/lib/systemd/system/netwo
 # Clean up dpkg.eatmydata
 rm -f /usr/bin/dpkg
 dpkg-divert --remove --rename /usr/bin/dpkg
+
+
 EOF
 
 # Run third stage
 chmod 755 ${work_dir}/third-stage
 systemd-nspawn_exec /third-stage
+
+# optionally run a fourth stage
+# if enables, this will install the base tools as outlined in 
+# install-packages.sh
+
+if [[ $answer == "y" ]]; then
+    # install packages from file
+    cp install-packages.sh ${work_dir}/install-packages.sh
+    systemd-nspawn_exec /install-packages.sh
+fi
 
 
 # Clean system
