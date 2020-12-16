@@ -1,5 +1,12 @@
 #!/bin/bash
 
+
+# move bin files over and make executable
+chmod +x /opt/bin/*
+mv /opt/bin/* /usr/bin/
+
+read  varname
+
 packages="git
 golang
 python3
@@ -88,10 +95,11 @@ pip3 install --upgrade instaloader
 #tar xvf phoneinfoga_$(uname -s)_$(uname -m).tar.gz
 #chmod +x /usr/bin/phoneinfoga
 
+#does not need bin
 git clone --recursive https://github.com/twintproject/twint.git /usr/share/Twint
 cd /usr/share/Twint
 python3 setup.py install
-#chmod +x /usr/bin/twint
+
 
 git clone --recursive https://github.com/hatlord/Spiderpig.git /usr/share/Spiderpig
 cd /usr/share/Spiderpig

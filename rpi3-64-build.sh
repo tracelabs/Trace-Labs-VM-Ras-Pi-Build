@@ -132,7 +132,7 @@ eatmydata debootstrap --foreign --keyring=/usr/share/keyrings/kali-archive-keyri
 
 # systemd-nspawn enviroment
 systemd-nspawn_exec(){
-  LANG=C systemd-nspawn -q --bind-ro ${qemu_bin} --cpu-affinity=8-13 --capability=cap_setfcap --setenv=RUNLEVEL=1 -M ${machine} -D ${work_dir} "$@"
+  LANG=C systemd-nspawn -q --bind-ro ${qemu_bin} --capability=cap_setfcap --setenv=RUNLEVEL=1 -M ${machine} -D ${work_dir} "$@"
 }
 
 # We need to manually extract eatmydata to use it for the second stage.
@@ -346,9 +346,12 @@ systemd-nspawn_exec /third-stage
 # install-packages.sh
 
 if [[ $answer == "y" ]]; then
-    # install packages from file
+    # copy over bin files that kick off apps
+    cp -r bin ${work_dir}/opt/bin  
+    #install additional packages and apps
     cp install-packages.sh ${work_dir}/install-packages.sh
     systemd-nspawn_exec /install-packages.sh
+    systemd-nspawn_exec rm -f /install-packages.sh
 fi
 
 
