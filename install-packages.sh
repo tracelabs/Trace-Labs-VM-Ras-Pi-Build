@@ -160,4 +160,4 @@ git clone --recursive https://github.com/megadose/OnionSearch.git /usr/share/Oni
 cd /usr/share/OnionSearch
 python3 setup.py install
 chmod +x /usr/share/updater/updater.sh
-chmod +x /etc/skel/Desktop/Updater.desktop
+chmod +x /home/osint/Desktop/Updater.desktop
