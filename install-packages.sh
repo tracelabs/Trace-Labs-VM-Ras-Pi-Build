@@ -4,6 +4,7 @@
 # move bin files over and make executable
 chmod +x /opt/bin/*
 mv /opt/bin/* /usr/bin/
+rm -rf /opt/bin
 
 packages="git
 golang
@@ -159,5 +160,5 @@ npm i -g tiktok-scraper
 git clone --recursive https://github.com/megadose/OnionSearch.git /usr/share/OnionSearch
 cd /usr/share/OnionSearch
 python3 setup.py install
-#chmod +x /usr/share/updater/updater.sh
+chmod +x /usr/share/updater/updater.sh
 #chmod +x /etc/skel/Desktop/Updater.desktop

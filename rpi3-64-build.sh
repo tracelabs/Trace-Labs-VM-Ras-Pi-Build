@@ -349,6 +349,11 @@ systemd-nspawn_exec /third-stage
 if [[ $answer == "y" ]]; then
     # copy over bin files that kick off apps
     cp -r bin ${work_dir}/opt/bin  
+    
+    #copy updater script to root system
+    mkdir ${work_dir}/usr/share/updater
+    cp updater.sh ${work_dir}/usr/share/updater
+
     #install additional packages and apps
     cp install-packages.sh ${work_dir}/install-packages.sh
     systemd-nspawn_exec /install-packages.sh
@@ -359,6 +364,7 @@ if [[ $answer == "y" ]]; then
     cp -r etc/xdg/menus/applications-merged ${work_dir}/etc/xdg/menus/
     #copy over firefox bookmarks
     cp -r /usr/share/firefox-esr/distribution/* ${work_dir}/usr/share/firefox-esr/distribution
+    
 fi
 
 
