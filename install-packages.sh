@@ -5,8 +5,6 @@
 chmod +x /opt/bin/*
 mv /opt/bin/* /usr/bin/
 
-read  varname
-
 packages="git
 golang
 python3

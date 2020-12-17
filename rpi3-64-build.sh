@@ -206,6 +206,7 @@ if [ -n "$proxy_url" ]; then
   echo "Acquire::http { Proxy \"$proxy_url\" };" > ${work_dir}/etc/apt/apt.conf.d/66proxy
 fi
 
+
 # Third stage
 #  Third stage is where the magic happens
 # This is where all the additional packages are installed and other changes made
@@ -352,6 +353,10 @@ if [[ $answer == "y" ]]; then
     cp install-packages.sh ${work_dir}/install-packages.sh
     systemd-nspawn_exec /install-packages.sh
     systemd-nspawn_exec rm -f /install-packages.sh
+    # copy over menu files
+    cp -R usr/share/applications ${work_dir}/usr/share/
+    cp -R usr/share/desktop-directories ${work_dir}/usr/share/
+    cp -r etc/xdg/menus/applications-merged ${work_dir}/etc/xdg/menus/
 fi
 
 
