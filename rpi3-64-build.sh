@@ -355,7 +355,7 @@ if [[ $answer == "y" ]]; then
     cp updater.sh ${work_dir}/usr/share/updater
 
      #copy updater icon to desktop
-    cp etc/skel/Desktop/Updater.desktop {$work_dir}/home/osint/Desktop/Updater.desktop
+    cp etc/skel/Desktop/Updater.desktop ${work_dir}/home/osint/Desktop/Updater.desktop
 
     #install additional packages and apps
     cp install-packages.sh ${work_dir}/install-packages.sh
