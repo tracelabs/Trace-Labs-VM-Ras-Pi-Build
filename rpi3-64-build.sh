@@ -343,7 +343,7 @@ chmod 755 ${work_dir}/third-stage
 systemd-nspawn_exec /third-stage
 
 # optionally run a fourth stage
-# if enables, this will install the base tools as outlined in 
+# if enabled, this will install the base tools as outlined in 
 # install-packages.sh
 
 if [[ $answer == "y" ]]; then
@@ -353,6 +353,9 @@ if [[ $answer == "y" ]]; then
     #copy updater script to root system
     mkdir ${work_dir}/usr/share/updater
     cp updater.sh ${work_dir}/usr/share/updater
+
+     #copy updater icon to desktop
+    cp etc/skel/Desktop/Updater.desktop {$work_dir}/etc/skel/Desktop/Updater.desktop
 
     #install additional packages and apps
     cp install-packages.sh ${work_dir}/install-packages.sh
@@ -368,6 +371,8 @@ if [[ $answer == "y" ]]; then
     #copy over background image and config file
     cp usr/share/backgrounds/kali/tracelabs.png ${work_dir}/usr/share/backgrounds/kali/tracelabs.png
     cp etc/xdg/xfce4/xfconf/xfce-perchannel-xml/xfce4-desktop.xml ${work_dir}/etc/xdg/xfce4/xfconf/xfce-perchannel-xml/xfce4-desktop.xml
+
+   
 fi
 
 

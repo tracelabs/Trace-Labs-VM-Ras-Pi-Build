@@ -12,8 +12,8 @@ if [ -d "/home/osint/Trace-Labs-VM-Ras-Pi-Updater" ]; then
         	sudo git pull https://github.com/humandecoded/Trace-Labs-VM-Ras-Pi-Updater.git --rebase
 	else
 		sudo git clone https://github.com/humandecoded/Trace-Labs-VM-Ras-Pi-Updater.git
-		cd Trace-Labs-VM-Ras-Pi-Updater
+		cd /home/osint/Trace-Labs-VM-Ras-Pi-Updater
 	fi
- chmod +x updater.sh
- sudo ./updater.sh
+ chmod +x /home/osint/Trace-Labs-VM-Ras-Pi-Updater/update-system.sh
+ sudo /home/osint/Trace-Labs-VM-Ras-Pi-Updater/update-system.sh
  sudo cp distribution.ini /usr/share/firefox-esr/distribution/   
