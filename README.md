@@ -1,6 +1,7 @@
 # Trace-Labs-VM-Ras-Pi-Build
 
-This project ports the Trace Labs OSINT VM over to a Raspberry Pi.  
+This project ports the Trace Labs OSINT VM over to a Raspberry Pi and was made possible by the work done by Offensive Secuirty. The core of this repo revolves around the build scripts created by them: 
+https://gitlab.com/kalilinux/build-scripts/kali-arm
 
 The below process has only been tested on Debian flavors of Linux:
 * Start by cloning this repo to a Debian based system and navigate in to the `Trace-Labs-VM-Ras-Pi-Build` directory
