@@ -17,4 +17,5 @@ if [ -d "/home/osint/Trace-Labs-VM-Ras-Pi-Updater" ]; then
  chmod +x /home/osint/Trace-Labs-VM-Ras-Pi-Updater/update-system.sh
  sudo /home/osint/Trace-Labs-VM-Ras-Pi-Updater/update-system.sh
  #sudo cp distribution.ini /usr/share/firefox-esr/distribution/
+ sudo mv "osint bookmarks.html" ~/Desktop
  sudo rm -rf /home/osint/Trace-Labs-VM-Ras-Pi-Updater
