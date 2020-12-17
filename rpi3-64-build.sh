@@ -364,7 +364,10 @@ if [[ $answer == "y" ]]; then
     cp -r etc/xdg/menus/applications-merged ${work_dir}/etc/xdg/menus/
     #copy over firefox bookmarks
     cp -r usr/share/firefox-esr/distribution/* ${work_dir}/usr/share/firefox-esr/distribution
-    
+
+    #copy over background image and config file
+    cp usr/share/backgrounds/kali/tracelabs.png ${work_dir}/usr/share/backgrounds/kali/tracelabs.png
+    cp etc/xdg/xfce4/xfconf/xfce-perchannel-xml/xfce4-desktop.xml ${work_dir}/etc/xdg/xfce4/xfconf/xfce-perchannel-xml/xfce4-desktop.xml
 fi
 
 
