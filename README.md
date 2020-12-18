@@ -6,7 +6,7 @@ https://gitlab.com/kalilinux/build-scripts/kali-arm
 The below process has only been tested on Debian flavors of Linux:
 * Start by cloning this repo to a Debian based system and navigate in to the `Trace-Labs-VM-Ras-Pi-Build` directory
 * Run `sudo ./build-deps.sh` - this will get your current system ready to build the Kali Pi image.
-* Run `sudo ./rpi3-64-build.sh <image name>` - This script gives you the option to install tools or not. Choosing "y" will take longer but you will end up with a fully built out OSINT system at the end. Selecting "n" will just build a bare bones Kali Pi system.
+* Run `sudo ./rpi3-64-build.sh <image name of your choice>` - This script gives you the option to install tools or not. Choosing "y" will take longer but you will end up with a fully built out OSINT system at the end. Selecting "n" will just build a bare bones Kali Pi system.
 * Burn the resulting `.img` file to an sd card as you normally would for a pi image.
 
 
