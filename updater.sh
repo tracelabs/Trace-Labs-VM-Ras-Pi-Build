@@ -9,9 +9,9 @@ cd /home/osint
 if [ -d "/home/osint/Trace-Labs-VM-Ras-Pi-Updater" ]; then        
 	
 		cd /home/osint/Trace-Labs-VM-Ras-Pi-Updater
-        	git pull https://github.com/humandecoded/Trace-Labs-VM-Ras-Pi-Updater.git
+        	git pull https://github.com/tracelabs/Trace-Labs-VM-Ras-Pi-Updater.git
 	else
-		git clone https://github.com/humandecoded/Trace-Labs-VM-Ras-Pi-Updater.git
+		git clone https://github.com/tracelabs/Trace-Labs-VM-Ras-Pi-Updater.git
 		cd /home/osint/Trace-Labs-VM-Ras-Pi-Updater
 	fi
  chmod +x /home/osint/Trace-Labs-VM-Ras-Pi-Updater/update-system.sh
