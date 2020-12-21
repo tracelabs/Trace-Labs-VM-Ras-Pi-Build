@@ -3,7 +3,7 @@
 This project ports the Trace Labs OSINT VM over to a Raspberry Pi and was made possible by the work done by Offensive Secuirty. The core of this repo revolves around the build scripts created by them: 
 https://gitlab.com/kalilinux/build-scripts/kali-arm
 
-The below process has only been tested on Debian flavors of Linux:
+The below process has only been tested on Debian flavors of Linux. It does involve adding additional repositories to your host Linux system and we recommend running it inside of a virtual machine (a Kali VM for example).
 * Start by cloning this repo to a Debian based system and navigate in to the `Trace-Labs-VM-Ras-Pi-Build` directory
 * Run `sudo ./build-deps.sh` - this will get your current system ready to build the Kali Pi image.
 * Run `sudo ./rpi3-64-build.sh <image name of your choice>` - This script gives you the option to install tools or not. Choosing "y" will take longer but you will end up with a fully built out OSINT system at the end. Selecting "n" will just build a bare bones Kali Pi system.
