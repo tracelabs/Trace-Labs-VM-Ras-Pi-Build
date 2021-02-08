@@ -318,6 +318,7 @@ rm -rf /root/userland
 cp /etc/skel/.bashrc /root/.bashrc
 
 # Set a REGDOMAIN.  This needs to be done or wireless doesn't work correctly on the RPi 3B+
+touch /etc/default/crda
 sed -i -e 's/REGDOM.*/REGDOMAIN=00/g' /etc/default/crda
 
 # Enable login over serial
@@ -354,7 +355,7 @@ if [[ $answer == "y" ]]; then
     mkdir ${work_dir}/usr/share/updater
     cp updater.sh ${work_dir}/usr/share/updater
 
-     #copy updater icon to desktop
+    #copy updater icon to desktop
     mkdir ${work_dir}/home/osint/Desktop 
     cp etc/skel/Desktop/Updater.desktop ${work_dir}/home/osint/Desktop/Updater.desktop
 
