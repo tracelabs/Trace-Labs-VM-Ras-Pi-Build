@@ -6,16 +6,10 @@
 # as well as plugs in the most recent firefox bookmarks
 cd /home/osint
 
-if [ -d "/home/osint/Trace-Labs-VM-Ras-Pi-Updater" ]; then        
-	
-		cd /home/osint/Trace-Labs-VM-Ras-Pi-Updater
-        	git pull https://github.com/tracelabs/Trace-Labs-VM-Ras-Pi-Updater.git
-	else
-		git clone https://github.com/tracelabs/Trace-Labs-VM-Ras-Pi-Updater.git
-		cd /home/osint/Trace-Labs-VM-Ras-Pi-Updater
-	fi
- chmod +x /home/osint/Trace-Labs-VM-Ras-Pi-Updater/update-system.sh
- sudo /home/osint/Trace-Labs-VM-Ras-Pi-Updater/update-system.sh
- #sudo cp distribution.ini /usr/share/firefox-esr/distribution/
- sudo mv "osint bookmarks.html" ~/Desktop
- sudo rm -rf /home/osint/Trace-Labs-VM-Ras-Pi-Updater
+wget -O updater-current.sh https://raw.githubusercontent.com/tracelabs/trace-labs-vm-ras-pi-build/humandecoded/updater-current.sh
+
+sudo /home/osint/updater-current.sh
+
+sudo rm -f updater-current.sh
+
+wget -O bookmarks.html https://raw.githubusercontent.com/tracelabs/trace-labs-vm-ras-pi-build/humandecoded/bookmarks.html
