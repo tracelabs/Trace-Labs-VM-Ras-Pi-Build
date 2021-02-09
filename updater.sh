@@ -7,7 +7,7 @@
 cd /home/osint
 
 wget -O updater-current.sh https://raw.githubusercontent.com/tracelabs/trace-labs-vm-ras-pi-build/humandecoded/updater-current.sh
-
+chmod +x /home/osint/updater-current.sh
 sudo /home/osint/updater-current.sh
 
 sudo rm -f updater-current.sh

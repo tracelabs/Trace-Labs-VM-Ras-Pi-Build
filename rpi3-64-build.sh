@@ -358,7 +358,7 @@ if [[ $answer == "y" ]]; then
      #copy updater icon to desktop
     mkdir ${work_dir}/home/osint/Desktop 
     cp etc/skel/Desktop/Updater.desktop ${work_dir}/home/osint/Desktop/Updater.desktop
-
+    systemd-nspawn_exec chmod +x /home/osint/Updater.desktop
     #install additional packages and apps
     cp install-packages.sh ${work_dir}/install-packages.sh
     systemd-nspawn_exec /install-packages.sh
