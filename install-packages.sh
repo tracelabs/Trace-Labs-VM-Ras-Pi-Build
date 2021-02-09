@@ -122,12 +122,12 @@ cd /usr/share/LittleBrother
 pip3 install -r requirements.txt
 #chmod +x /usr/bin/littlebrother
 
-git clone --recursive https://github.com/kpcyrd/sn0int.git /usr/share/sn0int
-cd /usr/share/sn0int
-cargo install -f --path .
-export PATH=""/root/.cargo/bin:$PATH""
-source ~/.bashrc
-#chmod +x /usr/bin/sn0int
+#git clone --recursive https://github.com/kpcyrd/sn0int.git /usr/share/sn0int
+#cd /usr/share/sn0int
+#cargo install -f --path .
+#export PATH=""/root/.cargo/bin:$PATH""
+#source ~/.bashrc
+##chmod +x /usr/bin/sn0int
 
 #git clone --recursive https://github.com/sham00n/buster /usr/share/buster
 #cd /usr/share/buster

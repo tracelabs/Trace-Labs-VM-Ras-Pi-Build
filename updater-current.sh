@@ -170,7 +170,7 @@ tput setaf 2;echo "[+] Done."
 
 
 #tput setaf 5;echo "[+] Updating sn0int..."
-#{
+# {
  #       if [ -d "/usr/share/sn0int" ]; then        
 	
 #		cd /usr/share/sn0int
