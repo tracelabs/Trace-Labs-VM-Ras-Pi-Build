@@ -54,6 +54,7 @@ osrframework
 libffi7 
 libffi-dev 
 python3-setuptools
+chromium
 "
 
 apt install -y $packages
