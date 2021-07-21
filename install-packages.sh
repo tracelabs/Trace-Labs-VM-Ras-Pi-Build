@@ -40,7 +40,6 @@ theharvester
 webhttrack
 outguess
 stegosuite
-wireshark
 openvpn
 metagoofil
 exifprobe
@@ -51,10 +50,8 @@ instaloader
 photon
 sublist3r
 osrframework
-libffi7 
-libffi-dev 
-python3-setuptools
-chromium
+drawing
+finalrecon
 "
 
 apt install -y $packages
@@ -77,7 +74,6 @@ pip3 install --upgrade ipdb
 pip3 install --upgrade click
 pip3 install --upgrade numpy
 pip3 install --upgrade tqdm
-pip3 install --upgrade shodan
 pip3 install --upgrade googletransx
 pip3 install --upgrade schedule
 pip3 install --upgrade aiohttp
@@ -86,20 +82,12 @@ pip3 install --upgrade cchardet
 pip3 install --upgrade elasticsearch
 pip3 install --upgrade geopy
 pip3 install --upgrade h8mail
-pip3 install --upgrade shodan
 pip3 install --upgrade instaloader
 
-#mkdir -p /usr/share/phoneinfoga
-#wget https://github.com/sundowndev/phoneinfoga/releases/download/v2.0.8/phoneinfoga_$(uname -s)_$(uname -m).tar.gz -O /usr/share/phoneinfoga/phoneinfoga_$(uname -s)_$(uname -m).tar.gz
-#cd /usr/share/phoneinfoga
-#tar xvf phoneinfoga_$(uname -s)_$(uname -m).tar.gz
-#chmod +x /usr/bin/phoneinfoga
 
-#does not need bin
 git clone --recursive https://github.com/twintproject/twint.git /usr/share/Twint
 cd /usr/share/Twint
 python3 setup.py install
-
 
 git clone --recursive https://github.com/hatlord/Spiderpig.git /usr/share/Spiderpig
 cd /usr/share/Spiderpig
@@ -123,27 +111,12 @@ cd /usr/share/LittleBrother
 pip3 install -r requirements.txt
 #chmod +x /usr/bin/littlebrother
 
-#git clone --recursive https://github.com/kpcyrd/sn0int.git /usr/share/sn0int
-#cd /usr/share/sn0int
-#cargo install -f --path .
-#export PATH=""/root/.cargo/bin:$PATH""
-#source ~/.bashrc
-##chmod +x /usr/bin/sn0int
-
-#git clone --recursive https://github.com/sham00n/buster /usr/share/buster
-#cd /usr/share/buster
-#python3 setup.py install
-#chmod +x /usr/bin/buster
 
 git clone --recursive https://github.com/bhavsec/reconspider /usr/share/reconspider
 cd /usr/share/reconspider
 python3 setup.py install
 #chmod +x /usr/bin/reconspider
 
-git clone --recursive https://github.com/thewhiteh4t/FinalRecon.git /usr/share/FinalRecon
-cd /usr/share/FinalRecon
-pip3 install -r requirements.txt
-#chmod +x /usr/bin/finalrecon
 
 git clone --recursive https://github.com/WebBreacher/WhatsMyName.git /usr/share/WhatsMyName
 cd /usr/share/WhatsMyName
