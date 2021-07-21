@@ -135,3 +135,7 @@ cd /usr/share/OnionSearch
 python3 setup.py install
 chmod +x /usr/share/updater/updater.sh
 chmod +x /home/osint/Desktop/Updater.desktop
+
+git clone https://github.com/megadose/toutatis.git /usr/share/toutatis
+cd /usr/share/toutatis
+python3 setup.py install

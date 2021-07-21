@@ -38,8 +38,7 @@ tput setaf 5;echo "[+] Updating LittleBrother..."
 	
 		cd /usr/share/LittleBrother
         	sudo git pull https://github.com/Lulz3xploit/LittleBrother --rebase
-	#else
-	#	sudo git clone https://github.com/Lulz3xploit/LittleBrother /usr/share/LittleBrother
+	
 	fi
 }
 tput setaf 2;echo "[+] Done."
@@ -56,8 +55,7 @@ tput setaf 5;echo "[+] Updating theHarvester..."
 	
 		cd /usr/share/theHarvester
         	sudo git pull https://github.com/laramies/theHarvester.git  --rebase
-	#else
-	#	sudo git clone https://github.com/laramies/theHarvester.git /usr/share/theHarvester
+
 	fi
 }
 tput setaf 2;echo "[+] Done."
@@ -70,8 +68,7 @@ tput setaf 5;echo "[+] Updating ExifScan..."
 	
 		cd /usr/share/exifscan
         	sudo git pull https://github.com/rcook/exifscan.git --rebase
-	#else
-		#sudo git clone https://github.com/rcook/exifscan /usr/share/exifscan
+	
 	fi
 }
 tput setaf 2;echo "[+] Done."
@@ -84,8 +81,7 @@ tput setaf 5;echo "[+] Updating DumpsterDiver..."
 	
 		cd /usr/share/DumpsterDiver
 		sudo git pull https://github.com/securing/DumpsterDiver.git --rebase
-	#else
-	#	sudo git clone https://github.com/securing/DumpsterDiver /usr/share/DumpsterDiver
+
 	fi
 } 
 tput setaf 2;echo "[+] Done."
@@ -99,8 +95,7 @@ tput setaf 5;echo "[+] Updating Sherlock..."
 		cd /usr/share/sherlock
 		sudo git init
         	sudo git pull https://github.com/sherlock-project/sherlock.git --rebase
-	#else
-	#	sudo git clone https://github.com/sherlock-project/sherlock /usr/share/sherlock
+
 	fi
 } 
 tput setaf 2;echo "[+] Done."
@@ -114,8 +109,7 @@ tput setaf 5;echo "[+] Updating Infoga..."
 	
 		cd /usr/share/Infoga
         	sudo git pull https://github.com/m4ll0k/Infoga.git --rebase
-	#else
-	#	sudo git clone https://github.com/m4ll0k/Infoga /usr/share/Infoga
+
 	fi
 } 
 tput setaf 2;echo "[+] Done."
@@ -130,8 +124,7 @@ tput setaf 5;echo "[+] Updating Metagoofil..."
 		cd /usr/share/metagoofil
 		sudo git init
         	sudo git pull https://github.com/opsdisk/metagoofil.git --rebase
-	#else
-	#	sudo git clone https://github.com/opsdisk/metagoofil /usr/share/metagoofil
+
 	fi
 } 
 tput setaf 2;echo "[+] Done."
@@ -160,31 +153,12 @@ tput setaf 5;echo "[+] Updating Stego Toolkit..."
 	
 		cd /usr/share/stego-toolkit
         	sudo git pull https://github.com/DominicBreuker/stego-toolkit.git --rebase
-	#else
-#		sudo git clone https://github.com/DominicBreuker/stego-toolkit.git  /usr/share/stego-toolkit
+
 	fi
 } 
 tput setaf 2;echo "[+] Done."
 
-###########################
-
-
-#tput setaf 5;echo "[+] Updating sn0int..."
-# {
- #       if [ -d "/usr/share/sn0int" ]; then        
-	
-#		cd /usr/share/sn0int
- #       	sudo git pull https://github.com/kpcyrd/sn0int.git --rebase
-  #      	sudo cargo install -f --path .
-#	else
-#		sudo git clone https://github.com/kpcyrd/sn0int /usr/share/sn0int
-#	fi
-#}  
-#tput setaf 2;echo "[+] Done."
-
-
-############################
-
+#################################################
 tput setaf 5;echo "[+] Updating Spiderpig..."
 {
         if [ -d "/usr/share/Spiderpig" ]; then        
@@ -192,8 +166,7 @@ tput setaf 5;echo "[+] Updating Spiderpig..."
 		cd /usr/share/Spiderpig
         	sudo git pull https://github.com/hatlord/Spiderpig.git --rebase
         	bundle install
-#	else
-#		sudo git clone https://github.com/hatlord/Spiderpig /usr/share/Spiderpig
+
 	fi
 }
 tput setaf 2;echo "[+] Done."
@@ -206,8 +179,7 @@ tput setaf 5;echo "[+] Updating WhatsMyName..."
 	
 		cd /usr/share/WhatsMyName
         	sudo git pull https://github.com/WebBreacher/WhatsMyName.git --rebase
-#	else
-#		sudo git clone https://github.com/WebBreacher/WhatsMyName /usr/share/WhatsMyName
+
 	fi
 }
 tput setaf 2;echo "[+] Done."
@@ -220,8 +192,7 @@ tput setaf 5;echo "[+] Updating WikiLeaker..."
 	
 		cd /usr/share/WikiLeaker
         	sudo git pull https://github.com/jocephus/WikiLeaker.git --rebase
-#	else
-#		sudo git clone https://github.com/jocephus/WikiLeaker /usr/share/WikiLeaker
+
 	fi
 }
 tput setaf 2;echo "[+] Done."
@@ -233,8 +204,19 @@ tput setaf 5;echo "[+] Updating OnionSearch..."
   if [ -d "/usr/share/OnionSearch" ]; then        
     cd /usr/share/OnionSearch
     sudo git pull https://github.com/megadose/OnionSearch.git --rebase
-	#else
-    #sudo git clone https://github.com/megadose/OnionSearch.git /usr/share/OnionSearch
-	fi
+	
+  fi
+}
+tput setaf 2;echo "[+] Done."
+
+################################
+tput setaf 5;echo "[+] Updating Toutatis..."
+{
+        if [ -d "/usr/share/toutatis" ]; then        
+	
+		    cd /usr/share/toutatis
+        	sudo git pull https://github.com/megadose/toutatis.git
+
+	    fi
 }
 tput setaf 2;echo "[+] Done."
