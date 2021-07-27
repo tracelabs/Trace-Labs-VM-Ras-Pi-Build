@@ -215,7 +215,7 @@ tput setaf 5;echo "[+] Updating Toutatis..."
         if [ -d "/usr/share/toutatis" ]; then        
 	
 		    cd /usr/share/toutatis
-        	sudo git pull https://github.com/megadose/toutatis.git
+        	sudo git pull https://github.com/megadose/toutatis.git --rebase
 
 	    fi
 }
