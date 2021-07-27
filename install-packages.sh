@@ -52,6 +52,7 @@ sublist3r
 osrframework
 drawing
 finalrecon
+chromium
 "
 
 apt install -y $packages
